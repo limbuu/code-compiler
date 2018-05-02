@@ -29,7 +29,7 @@ public class RubyService {
 		
 		String[] runCommand = {"ruby", file.getAbsolutePath()}; 
 		if (writeStatus) {
-			Map<String, String> result = this.compilerService.runFile(runCommand,rootDirectory);
+			Map<String, String> result = this.compilerService.runFile(codeChallenege,runCommand,rootDirectory);
 			if (result.get("result").equals(codeChallenege.getAnswer().getAnswers())) {
 				output.put("status", "passed");
 				output.put("output", result.get("Output"));

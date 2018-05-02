@@ -15,6 +15,8 @@ import org.apache.commons.exec.ExecuteWatchdog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.codecompiler.api.domain.CodeChallenge;
+
 
 @Service
 public class CompilerService {
@@ -28,7 +30,7 @@ public class CompilerService {
 	@Autowired
 	WatchdogService watchdogService;
 	
-	public Map<String, String> compileAndRunFile(String[] compileCommand,String[] runCommand, File rootDirectory) {
+	public Map<String, String> compileAndRunFile(CodeChallenge codeChallenege,String[] compileCommand,String[] runCommand, File rootDirectory) {
 		Map<String, String> result = new HashMap<>();
 		try {
 
@@ -63,9 +65,12 @@ public class CompilerService {
 
 				BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
 				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
-				writer.write("Hello World\nBye Bye World\nHello Again World\nBye Bye Again World");
-				writer.flush();
-				writer.close();
+				if(!codeChallenege.getAnswer().getParameters().isEmpty() && !codeChallenege.getAnswer().getAnswers().isEmpty()){
+					writer.write(codeChallenege.getAnswer().getParameters().toString());
+					writer.flush();
+					writer.close();
+				}
+				
 
 				if (process.getErrorStream().read() != -1) {
 					reader = new BufferedReader(new InputStreamReader(errOut));
@@ -97,7 +102,7 @@ public class CompilerService {
 
 	}
 
-	public Map<String, String> runFile(String[] runCommand, File rootDirectory) {
+	public Map<String, String> runFile(CodeChallenge codeChallenege,String[] runCommand, File rootDirectory) {
 		Map<String, String> results = new HashMap<>();
 
 		try {
@@ -114,9 +119,12 @@ public class CompilerService {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
-			writer.write("Hello World\nBye Bye World\nHello Again World\nBye Bye Again World");
-			writer.flush();
-			writer.close();
+			if(!codeChallenege.getAnswer().getParameters().isEmpty() && !codeChallenege.getAnswer().getAnswers().isEmpty()){
+				writer.write(codeChallenege.getAnswer().getParameters().toString());
+				writer.flush();
+				writer.close();
+			}
+			
 
 			if (process.getErrorStream().read() != -1) {
 				reader = new BufferedReader(new InputStreamReader(errOut));

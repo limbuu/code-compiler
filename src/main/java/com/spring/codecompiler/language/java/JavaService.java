@@ -40,7 +40,7 @@ public class JavaService {
 		String[] compileCommand = {"javac", file.getAbsolutePath()}; 
 		String[] runCommand = {"java", file.getAbsolutePath().replace(".java", "")}; 
 		if (writeStatus) {
-			Map<String, String> result = this.compilerService.compileAndRunFile(compileCommand,runCommand,rootDirectory);
+			Map<String, String> result = this.compilerService.compileAndRunFile(codeChallenege,compileCommand,runCommand,rootDirectory);
 			if (result.get("result").equals(codeChallenege.getAnswer().getAnswers())) {
 				output.put("status", "passed");
 				output.put("output", result.get("Output"));
