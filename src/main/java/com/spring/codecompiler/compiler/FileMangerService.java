@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class FileMangerService{
 	
 	public File createDirectory(String filePath) {

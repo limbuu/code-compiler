@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.codecompiler.api.domain.CodeChallenge;
 import com.spring.codecompiler.compiler.CompilerService;
@@ -13,6 +14,7 @@ import com.spring.codecompiler.compiler.FileMangerService;
 import com.spring.codecompiler.constants.FileServiceConstants;
 import com.spring.codecompiler.exception.BackEndException;
 
+@Service
 public class JavaScriptService {
 	
 	@Autowired
